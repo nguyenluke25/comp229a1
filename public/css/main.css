@@ -1,0 +1,25 @@
+body {background-color: pink;}
+
+.wrapper {
+    width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+     padding: 10px;
+}
+
+header, footer {
+    background-color: ghostwhite;
+    padding: 20px;
+}
+
+.layout-sidebar{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
+}
+
+main{
+    background-color: cornsilk;
+    padding: 20px;
+    
+}
