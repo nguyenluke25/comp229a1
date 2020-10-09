@@ -1,25 +1,74 @@
-body {background-color: pink;}
-
+body {
+    background-color:#393b44 !important;
+    font-family: 'Jura', sans-serif;
+    font-size: 20;
+    color: #393b44;
+    
+}
 .wrapper {
-    width: 900px;
+    width: 1200px;
     margin: 0 auto;
     background-color: #ffffff;
-     padding: 10px;
+    padding: 10px;
 }
 
 header, footer {
-    background-color: ghostwhite;
+    background-color: #d6e0f0;
     padding: 20px;
+    font-size: 26;   
+    font-family: 'Abril Fatface', cursive;
+    color: #393b44;
 }
 
 .layout-sidebar{
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 10px;
+    font-family: 'Jura', sans-serif;
+    color: #393b44;
 }
 
 main{
-    background-color: cornsilk;
+    background-color: #eeeeee;
+    font-family: 'Jura', sans-serif;
+    font-size: 30;
+    color: #393b44;  
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;  
+    padding: 10px;
+}
+.grid-item { 
     padding: 20px;
-    
+    font-size: 30px;
+    text-align: center;
+}
+
+.picsize{
+    height: auto;
+    width: 500px;
+    box-shadow: 2px 2px 4px #000000
+}
+p{
+    font-size: 22px;
+    margin-left: 10px;
+}
+
+.portrait{
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    width: 50%;
+    box-shadow: 2px 2px 4px #000000
+}
+a {
+    text-decoration: none;
+    color: #393b44
+}
+a:hover{
+    text-decoration: underline;
 }
