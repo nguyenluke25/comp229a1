@@ -1,3 +1,6 @@
+/* ExpressPortfolio229_Luke Nguyen_300744804_10092020  */
+
+/* General styling for most pages  */
 body {
     background-color:#393b44 !important;
     font-family: 'Noto Sans JP', sans-serif;
@@ -36,6 +39,7 @@ h1{
     font-family: 'Noto Sans JP', sans-serif;
     color: #393b44;
 }
+/* Project Page Styling  */
 .grid-container {
     display: grid;
     grid-template-columns: auto auto;  
@@ -47,6 +51,7 @@ h1{
     text-align: center;
 }
 
+/* Styling for Images  */
 .picsize{
     height: auto;
     width: 500px;
@@ -76,6 +81,7 @@ p{
     float:right;
     padding-right: 10px;
 }
+/* Resume Link Styling  */
 a {
     text-decoration: none;
     color: #393b44
