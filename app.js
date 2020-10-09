@@ -45,6 +45,7 @@ app.get('/services', (req, res) => {
     res.render('services', {title: 'Services Page'})
 })
 
+// Validation
 app.post('/contact', urlencodedParser,[
     check('fullname', 'Name must be at least two characters long')
         .exists() 
@@ -53,15 +54,17 @@ app.post('/contact', urlencodedParser,[
     check('email', 'Email is not valid')
         .isEmail()
         .normalizeEmail(),
-    check('password')
-        .custom(async (confirmPassword, {req}) => { 
-            const password = req.body.password1  
-            if(password !== confirmPassword){ 
-              throw new Error('Passwords must be same') 
-            } 
-        }),
-        
-    
+    check('message', 'Message must be at least two characters long')
+        .exists() 
+        .isLength({ min: 2 }),
+    // check('password')
+    //     .custom(async (confirmPassword, {req}) => { 
+    //         const password = req.body.password1  
+    //         if(password !== confirmPassword){ 
+    //           throw new Error('Passwords must be same') 
+    //         } 
+    //     }),
+           
     ], (req, res) => {
         const errors = validationResult(req)
         console.log(errors)
