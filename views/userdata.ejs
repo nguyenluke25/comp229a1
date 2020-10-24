@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="wrapper">
+        <%- include('./partials/header.ejs')%>
+        
+            <div class="row">
+                <div class= "div.col-md-offset-3 col-md-12">
+                    <h1> Business Contacts</h1>
+                    <br>
+                    <table class="table table-bordered table-striped table-hover">                       
+                        <tr>
+                            <th class= "text-center">Name</th>
+                            <th class= "text-center">Contact Number</th>
+                            <th class= "text-center">Email Address</th>
+                        </tr>
+    
+                        <% for(let count = 0; count < ContactList.length; count++) { %>
+                            <tr>
+                                <td class="text-center"><%=ContactList[count]['Name']%></td>
+                                <td class="text-center"><%=ContactList[count]['Contact Number']%></td>
+                                <td class="text-center"><%=ContactList[count]['Email Address']%></td>                             
+                            </tr>
+                        <% } %>
+                       
+                    </table>
+                </div>
+            </div>    
+            <%- include('./partials/footer.ejs')%>
+    </div>
+</body>
+</html>

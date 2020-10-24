@@ -37,6 +37,7 @@ h1{
     grid-template-columns: 2fr 1fr;
     gap: 10px;
     font-family: 'Noto Sans JP', sans-serif;
+    font-size: 22;
     color: #393b44;
 }
 /* Project Page Styling  */

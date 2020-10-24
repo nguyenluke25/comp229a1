@@ -5,14 +5,16 @@ const bodyParser=require('body-parser')
 const {check, validationResult} = require('express-validator')
 const expressLayouts = require('express-ejs-layouts')
 const app = express()
-const port = process.env.port || 8000
+const contactsRouter = require('../business')
+const port = process.env.PORT || 8000
 
 
 // Static Files
 app.use(express.static('public'))
-app.use('/css', express.static(__dirname + 'public/css'))
-app.use('/js', express.static(__dirname + 'public/js'))
-app.use('/img', express.static(__dirname + 'public/img'))
+app.use('/css', express.static(__dirname + '/../public/css'))
+app.use('/js', express.static(__dirname + '/../public/js'))
+app.use('/img', express.static(__dirname + '/../public/img'))
+app.use('/userdata', contactsRouter)
 
 // Set Views
 app.set('views', './views')
@@ -20,6 +22,21 @@ app.set('view engine', 'ejs')
 
 // Set Templating Engine
 app.use(expressLayouts)
+
+//database setup
+let mongoose = require('mongoose')
+let DB = require('./db')
+
+
+//point mongoose to the DB URI
+mongoose.connect(DB.URI, {useNewUrlParser: true, useUnifiedTopology: true})
+
+let mongoDB = mongoose.connection
+mongoDB.on('error', console.error.bind(console, 'Connection Error:'))
+mongoDB.once('open', ()=>{
+    console.log('Connected to MongoDB...');
+})
+
 
 const urlencodedParser = bodyParser.urlencoded({extended: false})
 
@@ -46,6 +63,10 @@ app.get('/services', (req, res) => {
     res.render('services', {title: 'Services Page'})
 })
 
+app.get('/userdata', (req, res) => {
+    res.render('userdata', {title: 'Business Contacts'})
+})
+
 // Validation
 app.post('/contact', urlencodedParser,[
     check('fullname', 'Name must be at least two characters long')
@@ -57,15 +78,7 @@ app.post('/contact', urlencodedParser,[
         .normalizeEmail(),
     check('message', 'Message must be at least two characters long')
         .exists() 
-        .isLength({ min: 2 }),
-    // check('password')
-    //     .custom(async (confirmPassword, {req}) => { 
-    //         const password = req.body.password1  
-    //         if(password !== confirmPassword){ 
-    //           throw new Error('Passwords must be same') 
-    //         } 
-    //     }),
-           
+        .isLength({ min: 2 }),       
     ], (req, res) => {
         const errors = validationResult(req)
         console.log(errors)
