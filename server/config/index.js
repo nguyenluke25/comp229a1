@@ -1,5 +1,8 @@
 /* ExpressPortfolio229_Luke Nguyen_300744804_10092020  */
 // Imports
+if (process.env.NODE_ENV !== 'production'){
+    require('dotenv').config()
+}
 const express = require('express')
 const bodyParser=require('body-parser')
 const {check, validationResult} = require('express-validator')
@@ -7,6 +10,18 @@ const expressLayouts = require('express-ejs-layouts')
 const app = express()
 const contactsRouter = require('../business')
 const port = process.env.PORT || 8000
+const bcrypt = require('bcrypt')
+const passport = require('passport')
+const flash = require('express-flash')
+const session = require('express-session')
+const methodOverride = require('method-override')
+const initializePassport = require('../../passport-config')
+initializePassport(
+    passport, 
+    username => users.find(user => user.username === username),
+    id => users.find(user => user.id === id),
+)
+const users = []
 
 
 // Static Files
@@ -15,6 +30,16 @@ app.use('/css', express.static(__dirname + '/../../public/css'))
 app.use('/js', express.static(__dirname + '/../../public/js'))
 app.use('/img', express.static(__dirname + '/../../public/img'))
 app.use('/userdata', contactsRouter)
+app.use(express.urlencoded({extended: false}))
+app.use(flash())
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(methodOverride('_method'))
 
 // Set Views
 app.set('views', __dirname + '/../views')
@@ -67,6 +92,14 @@ app.get('/userdata', (req, res) => {
     res.render('userdata/list', {title: 'Business Contacts'})
 })
 
+app.get('/login', (req, res) => {
+    res.render('login', {title: 'Login'})
+})
+
+app.get('/register', checkNotAutheticated,(req, res) => {
+    res.render('register', {title: 'Register'})
+})
+
 
 // Validation
 app.post('/contact', urlencodedParser,[
@@ -93,9 +126,50 @@ app.post('/contact', urlencodedParser,[
     }
 )
 
+app.post('/login', passport.authenticate ('local', {
+    successRedirect: '/userdata',
+    failureRedirect: '/login',
+    failureFlash: true
+}))
+
+app.post('/register', checkNotAutheticated, async (req, res) => {
+    try{
+        const hashedPassword = await bcrypt.hash (req.body.password, 10)
+        console.log(hashedPassword)
+        users.push({
+            id: Date.now().toString(),
+            username: req.body.username,
+            password: hashedPassword
+        })
+        res.redirect('/login')
+    } catch {
+        res.redirect('/register')
+    }
+    console.log(users)
+})
+
 app.get('', (req, res) => {
     res.sendFile(__dirname + '/views/home.html')
 })
+
+app.delete('/logout', (req, res) => {
+    req.logOut()
+    res.redirect('/login')
+})
+
+function checkAutheticated (req, res, next) {
+    if(req.isAuthenticated()) {
+        return next()
+    }
+    res.redirect('/login')
+}
+
+function checkNotAutheticated(req,res, next) {
+    if(req.isAuthenticated()) {
+        return res.redirect('/')
+    }
+    next()
+}
 
 // Listen on port 8000
 app.listen(port) 

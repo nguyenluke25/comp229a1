@@ -24,12 +24,12 @@ router.get('/', (req, res, next) => {
 })
 
 //GET route for displaying the user REGISTER page
-router.get('/register', (req, res, next) =>{
-    res.render('userdata/register', {title: 'Create new contact'})
+router.get('/add', (req, res, next) =>{
+    res.render('userdata/add', {title: 'Create new contact'})
 });
 
 //POST route for processing the user REGISTER page
-router.post('/register', (req, res, next) =>{
+router.post('/add', (req, res, next) =>{
     let newContact = Contacts({
         "Name": req.body.name,
         "Contact Number": req.body.contactNumber,

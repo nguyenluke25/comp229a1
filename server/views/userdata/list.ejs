@@ -38,9 +38,13 @@
                         <% } %>
                        
                     </table>
+                    <form action="/logout?_method=DELETE" method="POST">
+                        <button type="submit" class="btn btn-outline-secondary" style="margin:2px">Logout </button>
                 </div>
             </div>    
             <%- include('../partials/footer.ejs')%>
     </div>
 </body>
+
+</form>
 </html>
