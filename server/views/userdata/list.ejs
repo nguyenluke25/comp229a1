@@ -9,10 +9,12 @@
 <body>
     <div class="wrapper">
         <%- include('../partials/header.ejs')%>
+
         
             <div class="row">
                 <div class= "div.col-md-offset-3 col-md-12">
                     <h1> Business Contacts</h1>
+                    <a href="/userdata/add" type="button" class="btn btn-outline-success" style="margin:2px">Add a Contact</a>
                     <br>
                     <table class="table table-bordered table-striped table-hover">                       
                         <tr>
@@ -25,9 +27,10 @@
     
                         <% for(let count = 0; count < ContactList.length; count++) { %>
                             <tr>
-                                <td class="text-center"><%=ContactList[count]['Name']%></td>
-                                <td class="text-center"><%=ContactList[count]['Contact Number']%></td>
-                                <td class="text-center"><%=ContactList[count]['Email Address']%></td>
+                                <td class="text-center"><%=ContactList[count]['name']%></td>
+                                <td class="text-center"><%=ContactList[count]['contactNumber']%></td>
+                                <td class="text-center"><%=ContactList[count]['email']%></td>
+                                <% console.log(ContactList) %>
                                 <td class= "text-center">
                                     <a href="/userdata/update/<%= ContactList[count]._id %>" type="button" class="btn btn-outline-warning" style="margin:2px">Update</a>
                                 </td>

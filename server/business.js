@@ -31,9 +31,9 @@ router.get('/add', (req, res, next) =>{
 //POST route for processing the user REGISTER page
 router.post('/add', (req, res, next) =>{
     let newContact = Contacts({
-        "Name": req.body.name,
-        "Contact Number": req.body.contactNumber,
-        "Email Address": req.body.email
+        "name": req.body.name,
+        "contactNumber": req.body.contactNumber,
+        "email": req.body.email
     })
 
     Contacts.create(newContact, (err, Contacts) =>{
@@ -72,9 +72,9 @@ router.post('/update/:id', (req, res, next) =>{
     let id = req.params.id
 
     let updatedContact = {
-        "Name": req.body.name,
-        "Contact Number": req.body.contactNumber,
-        "Email Address": req.body.email
+        "name": req.body.name,
+        "contactNumber": req.body.contactNumber,
+        "email": req.body.email
     }
     Contacts.updateOne({_id: id}, updatedContact, (err) =>{
         if(err)
