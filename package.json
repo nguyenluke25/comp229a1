@@ -2,10 +2,10 @@
   "name": "expressportfolio",
   "version": "1.0.0",
   "description": "Assignment1",
-  "main": "./config/index.js",
+  "main": "./server/config/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon /config/index.js"
+    "start": "nodemon /server/config/index.js"
   },
   "author": "",
   "license": "ISC",

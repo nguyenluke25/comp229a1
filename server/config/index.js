@@ -11,13 +11,13 @@ const port = process.env.PORT || 8000
 
 // Static Files
 app.use(express.static('public'))
-app.use('/css', express.static(__dirname + '/../public/css'))
-app.use('/js', express.static(__dirname + '/../public/js'))
-app.use('/img', express.static(__dirname + '/../public/img'))
+app.use('/css', express.static(__dirname + '/../../public/css'))
+app.use('/js', express.static(__dirname + '/../../public/js'))
+app.use('/img', express.static(__dirname + '/../../public/img'))
 app.use('/userdata', contactsRouter)
 
 // Set Views
-app.set('views', './views')
+app.set('views', __dirname + '/../views')
 app.set('view engine', 'ejs')
 
 // Set Templating Engine
@@ -64,8 +64,9 @@ app.get('/services', (req, res) => {
 })
 
 app.get('/userdata', (req, res) => {
-    res.render('userdata', {title: 'Business Contacts'})
+    res.render('userdata/list', {title: 'Business Contacts'})
 })
+
 
 // Validation
 app.post('/contact', urlencodedParser,[
