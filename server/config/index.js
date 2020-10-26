@@ -33,18 +33,14 @@ app.use('/userdata', contactsRouter)
 app.use(express.urlencoded({extended: false}))
 app.use(flash())
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: 'victoria secret',
     resave: false,
     saveUninitialized: false
 }))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
-app.use(session({
-    secret: 'victoriassecret', 
-    resave: false, 
-    saveUninitialized: false
-  }))
+
 
 // Set Views
 app.set('views', __dirname + '/../views')
