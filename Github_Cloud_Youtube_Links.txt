@@ -1,6 +1,6 @@
 Cloud provider link:
 
-	https://comp229expressportfolio.herokuapp.com/
+	https://comp229assignment2ln.herokuapp.com/
 
 Github link:
 
@@ -8,7 +8,7 @@ Github link:
 
 Youtube presentation link:
 
-	https://youtu.be/ZgzlTWgL6Dc
+	https://youtu.be/5Ek8DL4q7-I
 
 
 
