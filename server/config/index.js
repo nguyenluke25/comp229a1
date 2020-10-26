@@ -40,6 +40,11 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
+app.use(session({
+    secret: 'victoriassecret', 
+    resave: false, 
+    saveUninitialized: false
+  }))
 
 // Set Views
 app.set('views', __dirname + '/../views')
